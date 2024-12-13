@@ -27,6 +27,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
                new com.devsuperior.dsmeta.dto.SaleSummaryDTO(sa.seller.name, SUM(sa.amount))
             FROM Sale sa
             WHERE sa.date BETWEEN :minDate AND :maxDate
+            GROUP BY sa.seller.name
             """)
     List<SaleSummaryDTO> getSummary(LocalDate minDate, LocalDate maxDate);
 }
